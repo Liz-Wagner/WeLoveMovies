@@ -5,9 +5,13 @@ Database Entity Relationship Diagram:
 Total of 6 different unique routes to handle and direct database queries from the client:
 
 /movies
+
 /movies/:movieId
+
 /movies/:movieId/reviews
+
 /movies/:movieId/theaters
+
 
 /reviews/:reviewId
 
