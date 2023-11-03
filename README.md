@@ -1,6 +1,6 @@
 Database Entity Relationship Diagram:
 
-![Entity Relationship Diagram](erd_movies_db3.png)
+![Entity Relationship Diagram](readme-files/erd_movies_db3.png)
 
 Total of 6 different unique routes to handle and direct database queries from the client:
 
