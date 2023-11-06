@@ -1,6 +1,7 @@
 const knex = require("../db/connection");
 const mapProperties = require("../utils/map-properties");
 
+//add nested object in returned data
 const addCritic = mapProperties({
     organization_name: "critic.organization_name",
     preferred_name: "critic.preferred_name",
@@ -17,21 +18,13 @@ function getListOfCurrentShowingMovies() {
     return knex("movies as m")
     .distinct()
     .join("movies_theaters as mt", "mt.movie_id", "m.movie_id")
-    .select(
-        "m.movie_id",
-        "m.title",
-        "m.runtime_in_minutes",
-        "m.rating",
-        "m.description",
-        "m.image_url"
-    )
+    .select("m.*")
     .where({ "mt.is_showing": true })
 }
 
 //Get individual movie info
 function getSpecificMovieInfo(movie_id) {
     return knex("movies")
-        //.select("*")
         .where({ movie_id })
         .first();
 }
@@ -39,8 +32,7 @@ function getSpecificMovieInfo(movie_id) {
 function getListOfTheatersPlayingAMovie(movieId) {
     return knex("theaters as t")
         .join("movies_theaters as mt", "t.theater_id", "mt.theater_id")
-        .join("movies as m", "m.movie_id", "mt.movie_id")
-        .select("t.*", "mt.is_showing", "m.movie_id")
+        .select("t.*", "mt.is_showing", "mt.movie_id")
         .where({ "mt.movie_id": movieId })
 }
 
